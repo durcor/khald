@@ -1,0 +1,16 @@
+# vi:ft=sh
+
+# How long before an event would you like to be notified?
+# For example:
+#  - 1 hour before: 1h
+#  - 30 minutes before: 30m
+# Possible suffixes:
+#  - h: hours
+#  - m: minutes
+#  - d: days
+# Default: 1 hour before
+NOTIFY_INTERVAL="1h"
+
+# How often do you want to check if there are any upcoming events and display them?
+# Default: 60 seconds (once per minute)
+REFRESH_INTERVAL="60"

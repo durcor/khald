@@ -1,0 +1,9 @@
+[Unit]
+Description=Notify of upcoming khal events
+Documentation=https://github.com/durcor/khald
+
+[Service]
+ExecStart=%h/.local/bin/khald
+
+[Install]
+WantedBy=default.target
