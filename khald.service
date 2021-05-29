@@ -1,5 +1,5 @@
 [Unit]
-Description=Notify of upcoming khal events
+Description=khald
 Documentation=https://github.com/durcor/khald
 
 [Service]
