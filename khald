@@ -3,7 +3,7 @@
 . "${XDG_CONFIG_HOME-$HOME/.config}/khald/config"
 
 while true; do
-    [ "$(khal list now "$NOTIFY_INTERVAL" --day-format='')" != "No events" ] && {
+    [ "$(khal list now "$NOTIFY_INTERVAL" --day-format='')" = "No events" ] || {
         notify-send \
             -i /usr/share/icons/Adwaita/96x96/mimetypes/x-office-calendar-symbolic.symbolic.png \
             -h string:x-canonical-private-synchronous:khald \
