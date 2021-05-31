@@ -1,5 +1,5 @@
 # khald
-A daemon for the awesome terminal-based calendar program, [khal](https://github.com/pimutils/khal) which notifies you of upcoming events in your calendar.
+A daemon for the awesome terminal-based calendar program, [khal](https://github.com/pimutils/khal), which notifies you of upcoming events in your calendar.
 
 ## Installation
 ```sh
