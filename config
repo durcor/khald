@@ -1,5 +1,3 @@
-# vi:ft=sh
-
 # How long before an event would you like to be notified?
 # For example:
 #  - 1 hour before: 1h

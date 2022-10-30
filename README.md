@@ -26,6 +26,5 @@ NOTIFY_INTERVAL="1h"
 
 # How often do you want to check if there are any upcoming events and display them?
 # Default: 60 seconds (once per minute)
-# TODO: Use same format as NOTIFY_INTERVAL
 REFRESH_INTERVAL="60"
 ```

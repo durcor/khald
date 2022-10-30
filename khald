@@ -3,14 +3,29 @@
 
 . "${XDG_CONFIG_HOME:-$HOME/.config}/khald/config"
 
+# Persistent khald history storage for preventing duplicate notifications
+# FIXME: Should this be $XDG_CACHE_HOME/khald?
+events=${XDG_DATA_HOME:-$HOME/.local/share}/khald
+touch "$events"
+
+if $WAYLAND_DISPLAY; then
+	pgrep -x mako >/dev/null || exit
+else
+	pgrep -x dunst >/dev/null || exit
+fi
+
 while true; do
-    [ "$(khal list now "$NOTIFY_INTERVAL" --day-format='')" = "No events" ] || (
-        notify-send \
-            -i /usr/share/icons/Adwaita/96x96/mimetypes/x-office-calendar-symbolic.symbolic.png \
-            -h string:x-canonical-private-synchronous:khald \
-            "Events for Today, $(date '+%A, %B %d, %Y')" \
-            "$(khal list now "$NOTIFY_INTERVAL" --day-format='' \
-                --format "{start-time} - {end-time}: [{calendar}] {title}")"
-    )
-    sleep "$REFRESH_INTERVAL"
+	[ "$(khal list now "$NOTIFY_INTERVAL" --day-format='')" ] && {
+		khald_format_str="{start-date} {start-time} - {end-time}: [{calendar}] {title}"
+		khal list now "$NOTIFY_INTERVAL" --day-format='' --format "$khald_format_str" | while IFS= read -r evt; do
+			grep -F "$evt" "$events" || {
+				notify-send \
+					-i /usr/share/icons/Adwaita/96x96/mimetypes/x-office-calendar-symbolic.symbolic.png \
+					"Event for $(date '+%A, %B %d, %Y')" \
+					"$evt"
+				echo "$evt" >>"$events"
+			}
+		done
+	}
+	sleep "$REFRESH_INTERVAL"
 done
